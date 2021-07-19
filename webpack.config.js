@@ -124,8 +124,10 @@ function startWebPack(environ={}){
 		}
 	},
 	output: {
-		chunkFilename: `js/chartiq-[name]${isProduction ? "-[contentHash]" :""}.js`,
-		filename: "js/chartiq-core.js",
+		// chunkFilename: `js/chartiq-[name]${isProduction ? "-[contentHash]" :""}.js`,
+		chunkFilename: `js/chartiq-[name]-[contentHash].js`,
+		// filename: "js/chartiq-core.js",
+		filename: "js/chartiq-core-[contentHash].js",
 		path: outputDir
 	},
 	plugins: [
@@ -151,7 +153,8 @@ function startWebPack(environ={}){
 		 * https://www.npmjs.com/package/extract-css-chunks-webpack-plugin
 		 */
 		new CssPlugin({
-			filename: `./css/chartiq${isProduction  ? "-[contenthash]": ""}.css`
+			// filename: `./css/chartiq${isProduction  ? "-[contenthash]": ""}.css`
+			filename: `./css/chartiq-[contenthash].css`
 			}),
 		/**
 		 * Generates an HTML file for your bundle and inserts the output files into it with script tags.

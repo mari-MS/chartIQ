@@ -212,13 +212,13 @@ if (typeof __TREE_SHAKE__ !== "undefined" && __TREE_SHAKE__) {
 //import "chartiq/plugins/visualearnings/visualearnings";
 /* end plugins */
 
-import getDefaultConfig from "chartiq/js/defaultConfiguration";
 import PerfectScrollbar from "chartiq/js/thirdparty/perfect-scrollbar.esm";
 import QuoteFeedSimulator from "./js/dataRequestor/quoteFeedSimulator.js";
+import getDefaultConfig from "chartiq/js/defaultConfiguration";
 
-// import "chartiq/js/symbolLookupChartIQ";
-// import "chartiq/js/marketDefinitionsSample";
-// import "chartiq/js/marketSymbologySample";
+import "chartiq/js/markets/symbolLookupChartIQ";
+import "chartiq/js/markets/marketDefinitionsSample";
+import "chartiq/js/markets/marketSymbologySample";
 // import marker from "chartiq/examples/markers/markersSample";
 // import "chartiq/examples/markers/tradeAnalyticsSample";
 // import "chartiq/examples/markers/videoSample";
@@ -240,18 +240,9 @@ const config = getDefaultConfig({
 });
 let stxx = config.createChart();
 
-
 window.stxx = stxx;
 
-if (typeof(Storage) !== "undefined") {
-  console.log("lastSelectedRange", localStorage.getItem("lastSelectedRange"))
-  // Retrieve
-  if(localStorage.getItem("lastSelectedRange")){
-  	rangeClicked(localStorage.getItem("lastSelectedRange"));
-  }
-} else {
-  console.log("Sorry, your browser does not support Web Storage...");
-}
+
 
 
 

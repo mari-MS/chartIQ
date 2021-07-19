@@ -11,6 +11,7 @@ class QuoteFeedSimulator {
 	}
 
 	postAjax (url, cb) {
+		// debugger;
 		var server = new XMLHttpRequest();
 		url += (url.indexOf("?") == -1 ? "?" : "&") + new Date().getTime();
 		server.open("GET", url);

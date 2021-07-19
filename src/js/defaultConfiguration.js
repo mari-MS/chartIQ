@@ -22,6 +22,10 @@
 
 
 import {CIQ} from "../js/chartiq.js";
+
+import Utils from "../js/utils.js";
+
+var utils = new Utils();
 	
 
 	// Available resources:
@@ -250,7 +254,7 @@ import {CIQ} from "../js/chartiq.js";
 						<div stxsetget="${cmd}">${label}<span class="ciq-radio"><span></span></span></div>
 					</cq-item>`,
 				range: ({ label, cmd, cls }) => `
-					<div id="${label}_range" ${cls ? `class="${cls}"` : ""} stxtap="${cmd}" onclick="rangeClicked('${label}')" >${label}</div>
+					<div id="${label}_range" ${cls ? `class="${cls}"` : ""} stxtap="${cmd}" onclick="utils.rangeClicked(${label})"  >${label}</div>
 				`,
 				dt: ({ tool, group, label, shortcut }) => `
 					<cq-item 
@@ -425,7 +429,7 @@ import {CIQ} from "../js/chartiq.js";
 				  console.log("lastSelectedRange", localStorage.getItem("lastSelectedRange"))
 				  // Retrieve
 				  if(localStorage.getItem("lastSelectedRange")){
-				  	rangeClicked(localStorage.getItem("lastSelectedRange"));
+				  	utils.rangeClicked(localStorage.getItem("lastSelectedRange"));
 				  }
 				} else {
 				  console.log("Sorry, your browser does not support Web Storage...");
@@ -437,21 +441,6 @@ import {CIQ} from "../js/chartiq.js";
 	}
 export default getConfig;
 
-function  rangeClicked(span) {
-	console.log('selectedspan',span);
-	let showRange = document.querySelector("cq-show-range").children;
-	console.log("showRange", showRange)
-	for(let i = 0; i < showRange.length; i++){
-		showRange[i].classList.remove('selected-range')
-	};
-	if (typeof(Storage) !== "undefined") {
-	  // Store
-	  localStorage.setItem("lastSelectedRange", span );
-	} else {
-	  document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-	}
-    document.getElementById(span+"_range").classList.add('selected-range');
 
-}
 
-window.rangeClicked = rangeClicked;
+// window.rangeClicked = rangeClicked;
