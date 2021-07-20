@@ -23,7 +23,7 @@
 
 import {CIQ} from "../js/chartiq.js";
 
-import { rangeClicked } from "chartiq/js/utils.js";
+import { rangeClicked, setBackground, setInLocalStorage, getFromLocalStorage } from "chartiq/js/utils.js";
 
 	
 
@@ -253,7 +253,7 @@ import { rangeClicked } from "chartiq/js/utils.js";
 						<div stxsetget="${cmd}">${label}<span class="ciq-radio"><span></span></span></div>
 					</cq-item>`,
 				range: ({ label, cmd, cls }) => `
-					<div id="${label}_range" ${cls ? `class="${cls}"` : ""} stxtap="${cmd}"  >${label}</div>
+					<div id="${label}" ${cls ? `class="${cls}"` : ""} stxtap="${cmd}"  >${label}</div>
 				`,
 				dt: ({ tool, group, label, shortcut }) => `
 					<cq-item 
@@ -424,15 +424,8 @@ import { rangeClicked } from "chartiq/js/utils.js";
 				return CIQ.ChartEngine.create({ container, config });
 			},
 			onWebComponentsReady: () => {
-				if (typeof(Storage) !== "undefined") {
-				  console.log("lastSelectedRange", localStorage.getItem("lastSelectedRange"))
-				  // Retrieve
-				  if(localStorage.getItem("lastSelectedRange")){
-				  	rangeClicked(localStorage.getItem("lastSelectedRange"));
-				  }
-				} else {
-				  console.log("Sorry, your browser does not support Web Storage...");
-				}
+				let obj = getFromLocalStorage("lastSpanRange")
+				setBackground(obj.multiplier+obj.base);
 			}
 		};
 		if(!resources.quoteFeed) config.quoteFeeds.length=0;

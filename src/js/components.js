@@ -23,7 +23,7 @@
 
 import { CIQ } from "../js/componentUI.js";
 
-import { rangeClicked } from "chartiq/js/utils.js";
+import { rangeClicked, setBackground, setInLocalStorage, getFromLocalStorage } from "chartiq/js/utils.js";
 
 let __js_webcomponents_abstractMarker_ = (_exports) => {
 
@@ -5184,10 +5184,15 @@ let __js_webcomponents_showRange_ = (_exports) => {
             self.context.stx.setSpan(params, function() {
                 if (self.context.loader) self.context.loader.hide();
             });
+            // console.log("params", params);
 
             // Mari
+            // setInLocalStorage( params);
+            
             // activator.e.target.classList.add('selected-range');
-            rangeClicked(activator.e.target.id);
+            // rangeClicked(activator.e.target.id);
+
+            // setBackground(activator.e.target);
 
             // console.log("this", this);
             // console.log("activator", activator , "multiplier", multiplier, "base", base, "interval", interval, "period", period, "timeUnit", timeUnit);

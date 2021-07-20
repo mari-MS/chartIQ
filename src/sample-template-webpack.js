@@ -18,6 +18,9 @@ import * as Standard from "chartiq/js/standard";
 import * as Advanced from "chartiq/js/advanced";
 import * as AddOns from "chartiq/js/addOns";
 import * as Components from "chartiq/js/components";
+
+import { rangeClicked, setBackground, setInLocalStorage, getFromLocalStorage } from "chartiq/js/utils.js";
+
 /* Uncomment to see all available feature names in console */
 //console.log(Object.keys(Standard));
 //console.log(Object.keys(Advanced));
@@ -241,6 +244,23 @@ const config = getDefaultConfig({
 let stxx = config.createChart();
 
 window.stxx = stxx;
+
+stxx.addEventListener("tap", function (tapObject) {
+	console.log("tapObject", tapObject)
+});
+
+stxx.addEventListener("layout", function (obj) {
+	obj = obj.layout.setSpan;
+	console.log("layoutChanged", obj)
+	if(obj && Object.keys(obj).length !== 0 && obj.constructor === Object) {
+		console.log("inside1", obj)
+		if(JSON.stringify(getFromLocalStorage("lastSpanRange")) !==  JSON.stringify(obj)) {
+			console.log("inside2")
+			setInLocalStorage(obj);
+			setBackground(obj.multiplier+obj.base);	
+		}
+	}	
+});
 
 
 
